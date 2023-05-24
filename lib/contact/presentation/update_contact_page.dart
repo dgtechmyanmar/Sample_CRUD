@@ -32,6 +32,26 @@ class _UpdateContactPageState extends ConsumerState<UpdateContactPage> {
 
   @override
   Widget build(BuildContext context) {
+    ref.listen(
+      saveContactNotifierProvider,
+      (previous, next) {
+        next.when(
+          initial: () => debugPrint('saveContactNotifierProvider/ initial'),
+          loading: () {
+            debugPrint('saveContactNotifierProvider/ loading');
+          },
+          noConnection: () =>
+              debugPrint('saveContactNotifierProvider/ noConnection'),
+          success: (data) {
+            debugPrint('saveContactNotifierProvider/ success');
+            debugPrint('saveContactNotifierProvider/ $data');
+            ref.read(contactNotifierProvider.notifier).getContacts();
+            AutoRouter.of(context).pop();
+          },
+          error: (error) => debugPrint('saveContactNotifierProvider/ error'),
+        );
+      },
+    );
     return Scaffold(
       appBar: AppBar(
         title: const Text('Update Contact'),

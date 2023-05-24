@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_sample_crud/contact/domain/contact.dart';
 import 'package:flutter_sample_crud/contact/shared/contact_provider.dart';
 import 'package:flutter_sample_crud/core/presentation/router/app_router.gr.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -13,6 +14,7 @@ class ContactPage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<ContactPage> {
+  List<Contact> contactList = [];
   @override
   void initState() {
     super.initState();
@@ -32,37 +34,25 @@ class _HomePageState extends ConsumerState<ContactPage> {
       (previous, next) {
         next.when(
           initial: () => debugPrint('contactNotifierProvider/ initial'),
-          loading: () => debugPrint('contactNotifierProvider/ loading'),
+          loading: () {
+            debugPrint('contactNotifierProvider/ loading');
+            contactList.clear();
+          },
           noConnection: () =>
               debugPrint('contactNotifierProvider/ noConnection'),
           empty: () => debugPrint('contactNotifierProvider/ empty'),
           success: (data) {
             debugPrint('contactNotifierProvider/ success');
             debugPrint('contactNotifierProvider/ $data');
+            for (var element in data) {
+              contactList.add(element);
+            }
           },
           error: (error) => debugPrint('contactNotifierProvider/ error'),
         );
       },
     );
 
-    ref.listen(
-      saveContactNotifierProvider,
-      (previous, next) {
-        next.when(
-          initial: () => debugPrint('saveContactNotifierProvider/ initial'),
-          loading: () => debugPrint('saveContactNotifierProvider/ loading'),
-          noConnection: () =>
-              debugPrint('saveContactNotifierProvider/ noConnection'),
-          success: (data) {
-            debugPrint('saveContactNotifierProvider/ success');
-            debugPrint('saveContactNotifierProvider/ $data');
-            ref.read(contactNotifierProvider.notifier).getContacts();
-            AutoRouter.of(context).pop();
-          },
-          error: (error) => debugPrint('saveContactNotifierProvider/ error'),
-        );
-      },
-    );
     return Scaffold(
       appBar: AppBar(
         title: const Text('Sample CRUD'),
@@ -97,21 +87,24 @@ class _HomePageState extends ConsumerState<ContactPage> {
           child: Text('No Data'),
         ),
         success: (contacts) => ListView.builder(
-          itemCount: contacts.length,
+          itemCount: contactList.length,
           itemBuilder: (context, index) => Card(
             child: ListTile(
               leading: CircleAvatar(child: Text('${index + 1}')),
-              title: Text(contacts[index].name),
-              subtitle: Text(contacts[index].phone),
+              title: Text(contactList[index].name),
+              subtitle: Text(contactList[index].phone),
               trailing: IconButton(
                   onPressed: () {
                     ref
                         .read(saveContactNotifierProvider.notifier)
-                        .deleteContact(contacts[index].id);
+                        .deleteContact(contactList[index].id);
+                    setState(() {
+                      contactList.removeAt(index);
+                    });
                   },
                   icon: const Icon(Icons.delete)),
               onTap: () => AutoRouter.of(context)
-                  .push(UpdateContactRoute(contact: contacts[index])),
+                  .push(UpdateContactRoute(contact: contactList[index])),
             ),
           ),
         ),
