@@ -1,0 +1,17 @@
+import 'package:dio/dio.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:dartz/dartz.dart';
+
+final dioProvider = Provider(
+  (ref) => Dio()
+    ..options = BaseOptions(
+      baseUrl: 'https://646ccc017b42c06c3b2c0977.mockapi.io/api/contact',
+      contentType: 'application/json',
+    ),
+);
+
+final initializationProvider = FutureProvider<Unit>((ref) async {
+  ref.watch(dioProvider);
+
+  return unit;
+});
