@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:dartz/dartz.dart';
+import 'package:uuid/uuid.dart';
 import 'package:flutter_sample_crud/core/config/app_strings.dart';
 import 'package:flutter_sample_crud/core/domain/response_info_error.dart';
 import 'package:flutter_sample_crud/core/infrastructure/dio_extensions.dart';
@@ -19,6 +20,39 @@ class ContactRemoteService {
         var jsonData = resData.map((e) => Contact.fromJson(e)).toList();
         // print(jsonData);
         return right(NetworkResult.result(jsonData));
+      } else {
+        return left(ResponseInfoError(
+            code: response.statusCode.toString(),
+            message: response.statusMessage));
+      }
+    } on DioError catch (e) {
+      if (e.isNoConnectionError) {
+        return right(const NetworkResult.noConnection());
+      } else if (e.error != null) {
+        return left(ResponseInfoError(
+            code: e.response?.statusCode.toString(),
+            message: e.response?.statusMessage));
+      } else {
+        rethrow;
+      }
+    }
+  }
+
+  Future<Either<ResponseInfoError, NetworkResult<String>>> addContact(
+      String name, String phone) async {
+    final body = {
+      "createdAt": DateTime.now().toString(),
+      "name": name,
+      "phone": phone,
+      "id": ''
+    };
+    try {
+      final response = await _dio.post('/', data: body);
+      print('addContact / $response');
+      print('addContact / ${response.statusCode}');
+      print('addContact / ${response.statusMessage}');
+      if (response.statusCode == AppStrings.createCode) {
+        return right(NetworkResult.result(response.statusMessage.toString()));
       } else {
         return left(ResponseInfoError(
             code: response.statusCode.toString(),

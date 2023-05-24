@@ -11,5 +11,6 @@ class AppRouter extends $AppRouter {
   final List<AutoRoute> routes = [
     AutoRoute(page: SplashRoute.page, path: '/'),
     AutoRoute(page: ContactRoute.page, path: '/home'),
+    AutoRoute(page: AddContactRoute.page, path: '/add'),
   ];
 }

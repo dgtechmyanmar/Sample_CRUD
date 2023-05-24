@@ -34,6 +34,7 @@ dependencies:
   shared_preferences: ^2.0.15
   # utilities
   intl: ^0.18.0
+  uuid: ^3.0.7
   
   nil: ^1.1.1
 

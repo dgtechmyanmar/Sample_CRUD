@@ -1,6 +1,8 @@
 import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sample_crud/contact/shared/contact_provider.dart';
+import 'package:flutter_sample_crud/core/presentation/router/app_router.gr.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
@@ -12,6 +14,17 @@ class ContactPage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<ContactPage> {
+  @override
+  void initState() {
+    super.initState();
+    getContacts();
+  }
+
+  Future<void> getContacts() async {
+    Future.microtask(
+        () => ref.read(contactNotifierProvider.notifier).getContacts());
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(contactNotifierProvider);
@@ -41,8 +54,19 @@ class _HomePageState extends ConsumerState<ContactPage> {
         loading: () => const Center(
           child: CircularProgressIndicator(),
         ),
-        noConnection: () => const Center(
-          child: Text('No Connection\nCheck your internet!'),
+        noConnection: () => Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'No Connection\nCheck your internet!',
+                textAlign: TextAlign.center,
+              ),
+              IconButton(
+                  onPressed: () => getContacts(),
+                  icon: const Icon(Icons.refresh))
+            ],
+          ),
         ),
         empty: () => const Center(
           child: Text('No Data'),
@@ -61,10 +85,7 @@ class _HomePageState extends ConsumerState<ContactPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // ref.read(contactRemoteServiceProvider).getContacts();
-          ref.read(contactNotifierProvider.notifier).getContacts();
-        },
+        onPressed: () => AutoRouter.of(context).push(const AddContactRoute()),
         child: const Icon(Icons.add),
       ),
     );
