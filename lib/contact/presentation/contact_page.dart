@@ -1,4 +1,3 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sample_crud/contact/shared/contact_provider.dart';
@@ -45,9 +44,35 @@ class _HomePageState extends ConsumerState<ContactPage> {
         );
       },
     );
+
+    ref.listen(
+      saveContactNotifierProvider,
+      (previous, next) {
+        next.when(
+          initial: () => debugPrint('saveContactNotifierProvider/ initial'),
+          loading: () => debugPrint('saveContactNotifierProvider/ loading'),
+          noConnection: () =>
+              debugPrint('saveContactNotifierProvider/ noConnection'),
+          success: (data) {
+            debugPrint('saveContactNotifierProvider/ success');
+            debugPrint('saveContactNotifierProvider/ $data');
+            ref.read(contactNotifierProvider.notifier).getContacts();
+            AutoRouter.of(context).pop();
+          },
+          error: (error) => debugPrint('saveContactNotifierProvider/ error'),
+        );
+      },
+    );
     return Scaffold(
       appBar: AppBar(
         title: const Text('Sample CRUD'),
+        actions: [
+          IconButton(
+            onPressed: () =>
+                ref.read(contactNotifierProvider.notifier).getContacts(),
+            icon: const Icon(Icons.refresh),
+          ),
+        ],
       ),
       body: state.when(
         initial: () => const SizedBox(),
@@ -75,8 +100,18 @@ class _HomePageState extends ConsumerState<ContactPage> {
           itemCount: contacts.length,
           itemBuilder: (context, index) => Card(
             child: ListTile(
+              leading: CircleAvatar(child: Text('${index + 1}')),
               title: Text(contacts[index].name),
               subtitle: Text(contacts[index].phone),
+              trailing: IconButton(
+                  onPressed: () {
+                    ref
+                        .read(saveContactNotifierProvider.notifier)
+                        .deleteContact(contacts[index].id);
+                  },
+                  icon: const Icon(Icons.delete)),
+              onTap: () => AutoRouter.of(context)
+                  .push(UpdateContactRoute(contact: contacts[index])),
             ),
           ),
         ),

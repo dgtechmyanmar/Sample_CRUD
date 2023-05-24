@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'save_contact_notifier.dart';
+part of 'delete_contact_notifier.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$SaveContactState {
+mixin _$DeleteContactState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -75,16 +75,16 @@ mixin _$SaveContactState {
 }
 
 /// @nodoc
-abstract class $SaveContactStateCopyWith<$Res> {
-  factory $SaveContactStateCopyWith(
-          SaveContactState value, $Res Function(SaveContactState) then) =
-      _$SaveContactStateCopyWithImpl<$Res, SaveContactState>;
+abstract class $DeleteContactStateCopyWith<$Res> {
+  factory $DeleteContactStateCopyWith(
+          DeleteContactState value, $Res Function(DeleteContactState) then) =
+      _$DeleteContactStateCopyWithImpl<$Res, DeleteContactState>;
 }
 
 /// @nodoc
-class _$SaveContactStateCopyWithImpl<$Res, $Val extends SaveContactState>
-    implements $SaveContactStateCopyWith<$Res> {
-  _$SaveContactStateCopyWithImpl(this._value, this._then);
+class _$DeleteContactStateCopyWithImpl<$Res, $Val extends DeleteContactState>
+    implements $DeleteContactStateCopyWith<$Res> {
+  _$DeleteContactStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -101,7 +101,7 @@ abstract class _$$_InitialCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InitialCopyWithImpl<$Res>
-    extends _$SaveContactStateCopyWithImpl<$Res, _$_Initial>
+    extends _$DeleteContactStateCopyWithImpl<$Res, _$_Initial>
     implements _$$_InitialCopyWith<$Res> {
   __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
       : super(_value, _then);
@@ -114,7 +114,7 @@ class _$_Initial implements _Initial {
 
   @override
   String toString() {
-    return 'SaveContactState.initial()';
+    return 'DeleteContactState.initial()';
   }
 
   @override
@@ -207,7 +207,7 @@ class _$_Initial implements _Initial {
   }
 }
 
-abstract class _Initial implements SaveContactState {
+abstract class _Initial implements DeleteContactState {
   const factory _Initial() = _$_Initial;
 }
 
@@ -220,7 +220,7 @@ abstract class _$$_LoadingCopyWith<$Res> {
 
 /// @nodoc
 class __$$_LoadingCopyWithImpl<$Res>
-    extends _$SaveContactStateCopyWithImpl<$Res, _$_Loading>
+    extends _$DeleteContactStateCopyWithImpl<$Res, _$_Loading>
     implements _$$_LoadingCopyWith<$Res> {
   __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
       : super(_value, _then);
@@ -233,7 +233,7 @@ class _$_Loading implements _Loading {
 
   @override
   String toString() {
-    return 'SaveContactState.loading()';
+    return 'DeleteContactState.loading()';
   }
 
   @override
@@ -326,7 +326,7 @@ class _$_Loading implements _Loading {
   }
 }
 
-abstract class _Loading implements SaveContactState {
+abstract class _Loading implements DeleteContactState {
   const factory _Loading() = _$_Loading;
 }
 
@@ -339,7 +339,7 @@ abstract class _$$_NoConnectionCopyWith<$Res> {
 
 /// @nodoc
 class __$$_NoConnectionCopyWithImpl<$Res>
-    extends _$SaveContactStateCopyWithImpl<$Res, _$_NoConnection>
+    extends _$DeleteContactStateCopyWithImpl<$Res, _$_NoConnection>
     implements _$$_NoConnectionCopyWith<$Res> {
   __$$_NoConnectionCopyWithImpl(
       _$_NoConnection _value, $Res Function(_$_NoConnection) _then)
@@ -353,7 +353,7 @@ class _$_NoConnection implements _NoConnection {
 
   @override
   String toString() {
-    return 'SaveContactState.noConnection()';
+    return 'DeleteContactState.noConnection()';
   }
 
   @override
@@ -446,7 +446,7 @@ class _$_NoConnection implements _NoConnection {
   }
 }
 
-abstract class _NoConnection implements SaveContactState {
+abstract class _NoConnection implements DeleteContactState {
   const factory _NoConnection() = _$_NoConnection;
 }
 
@@ -461,7 +461,7 @@ abstract class _$$_SuccessCopyWith<$Res> {
 
 /// @nodoc
 class __$$_SuccessCopyWithImpl<$Res>
-    extends _$SaveContactStateCopyWithImpl<$Res, _$_Success>
+    extends _$DeleteContactStateCopyWithImpl<$Res, _$_Success>
     implements _$$_SuccessCopyWith<$Res> {
   __$$_SuccessCopyWithImpl(_$_Success _value, $Res Function(_$_Success) _then)
       : super(_value, _then);
@@ -490,7 +490,7 @@ class _$_Success implements _Success {
 
   @override
   String toString() {
-    return 'SaveContactState.success(success: $success)';
+    return 'DeleteContactState.success(success: $success)';
   }
 
   @override
@@ -591,7 +591,7 @@ class _$_Success implements _Success {
   }
 }
 
-abstract class _Success implements SaveContactState {
+abstract class _Success implements DeleteContactState {
   const factory _Success(final String success) = _$_Success;
 
   String get success;
@@ -610,7 +610,7 @@ abstract class _$$_ErrorCopyWith<$Res> {
 
 /// @nodoc
 class __$$_ErrorCopyWithImpl<$Res>
-    extends _$SaveContactStateCopyWithImpl<$Res, _$_Error>
+    extends _$DeleteContactStateCopyWithImpl<$Res, _$_Error>
     implements _$$_ErrorCopyWith<$Res> {
   __$$_ErrorCopyWithImpl(_$_Error _value, $Res Function(_$_Error) _then)
       : super(_value, _then);
@@ -639,7 +639,7 @@ class _$_Error implements _Error {
 
   @override
   String toString() {
-    return 'SaveContactState.error(error: $error)';
+    return 'DeleteContactState.error(error: $error)';
   }
 
   @override
@@ -740,7 +740,7 @@ class _$_Error implements _Error {
   }
 }
 
-abstract class _Error implements SaveContactState {
+abstract class _Error implements DeleteContactState {
   const factory _Error(final ResponseInfoError error) = _$_Error;
 
   ResponseInfoError get error;

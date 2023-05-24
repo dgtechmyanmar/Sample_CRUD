@@ -17,23 +17,6 @@ class _AddContactPageState extends ConsumerState<AddContactPage> {
   final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    ref.listen(
-      saveContactNotifierProvider,
-      (previous, next) {
-        next.when(
-          initial: () => debugPrint('saveContactNotifierProvider/ initial'),
-          loading: () => debugPrint('saveContactNotifierProvider/ loading'),
-          noConnection: () =>
-              debugPrint('saveContactNotifierProvider/ noConnection'),
-          empty: () => debugPrint('saveContactNotifierProvider/ empty'),
-          success: (data) {
-            debugPrint('saveContactNotifierProvider/ success');
-            debugPrint('saveContactNotifierProvider/ $data');
-          },
-          error: (error) => debugPrint('saveContactNotifierProvider/ error'),
-        );
-      },
-    );
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Contact'),
