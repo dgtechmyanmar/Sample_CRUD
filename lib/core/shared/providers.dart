@@ -5,7 +5,8 @@ import 'package:dartz/dartz.dart';
 final dioProvider = Provider(
   (ref) => Dio()
     ..options = BaseOptions(
-      baseUrl: 'https://646ccc017b42c06c3b2c0977.mockapi.io/api/contact',
+      // baseUrl: 'https://646ccc017b42c06c3b2c0977.mockapi.io/api/contact',
+      baseUrl: "https://64e5da0609e64530d17f2458.mockapi.io/api/contacts",
       contentType: 'application/json',
     ),
 );
