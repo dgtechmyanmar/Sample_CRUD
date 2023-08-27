@@ -1,11 +1,11 @@
 name: flutter_sample_crud
 description: A new Flutter project.
-publish_to: 'none' 
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -35,7 +35,7 @@ dependencies:
   # utilities
   intl: ^0.18.0
   uuid: ^3.0.7
-  
+
   nil: ^1.1.1
 
 dev_dependencies:
@@ -46,7 +46,6 @@ dev_dependencies:
   freezed: ^2.3.4
   json_serializable: ^6.3.1
   build_runner: any
-
 
 flutter:
   uses-material-design: true
